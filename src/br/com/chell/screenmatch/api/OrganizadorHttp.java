@@ -1,5 +1,6 @@
 package br.com.chell.screenmatch.api;
 
+import br.com.chell.screenmatch.exception.ErroAnoInvalidoException;
 import br.com.chell.screenmatch.models.Titulo;
 import br.com.chell.screenmatch.models.TituloOmdb;
 import com.google.gson.FieldNamingPolicy;
@@ -39,8 +40,15 @@ public class OrganizadorHttp extends OrganizadorApi{
         TituloOmdb meuTituloOmdb = gson.fromJson(json, TituloOmdb.class);
         System.out.println(meuTituloOmdb);
 
-        Titulo meuTitulo = new Titulo(meuTituloOmdb);
-        System.out.println(meuTitulo);
+        try {
+            Titulo meuTitulo = new Titulo(meuTituloOmdb);
+            System.out.println(meuTitulo);
+        } catch (NumberFormatException e) {
+            System.out.println("Ocorreu um erro: " + e.getMessage());
+        } catch (ErroAnoInvalidoException e) {
+            System.out.println("Ocorreu um erro: " + e.getMensagem());
+        }
+
     }
 }
 
