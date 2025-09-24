@@ -33,4 +33,13 @@ public class OrganizadorApi {
         System.out.print("Digite sua APIKey do OMDb: ");
         api = s.next();
     }
+
+    public String toStringFilme() {
+        return "Filme: " + filmeLink;
+    }
+
+    public String toStringApi() {
+        return "Api: " + api;
+    }
+
 }
