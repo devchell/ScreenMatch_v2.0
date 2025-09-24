@@ -3,15 +3,19 @@ package br.com.chell.screenmatch.models;
 import com.google.gson.annotations.SerializedName;
 
 public class Titulo implements Comparable<Titulo> {
-    @SerializedName("Title")
     private String nome;
-    @SerializedName("Year")
     private int anoLancamento;
     private boolean incluidoPremium;
     private double somaDasAvaliacoes;
     private int quantidadeAvaliacao;
     private int duracaoMinutos;
     private String nomeDiretor;
+
+    public Titulo(TituloOmdb meuTituloOmdb) {
+        this.nome = meuTituloOmdb.title();
+        this.anoLancamento = Integer.parseInt(meuTituloOmdb.year());
+        this.duracaoMinutos = Integer.parseInt(meuTituloOmdb.runtime().substring(0, 2));
+    }
 
     public Titulo(String nome, int anoLancamento) {
         this.nome = nome;
@@ -80,5 +84,11 @@ public class Titulo implements Comparable<Titulo> {
     @Override
     public int compareTo(Titulo outroTitulo) {
         return this.getNome().compareTo(outroTitulo.getNome());
+    }
+
+    @Override
+    public String toString() {
+        return "Título: " + nome + " | Ano de lançamento: " + anoLancamento + " | Duração: " +
+                duracaoMinutos + " min";
     }
 }

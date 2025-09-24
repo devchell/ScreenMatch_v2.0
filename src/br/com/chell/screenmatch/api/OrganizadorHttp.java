@@ -1,7 +1,10 @@
 package br.com.chell.screenmatch.api;
 
 import br.com.chell.screenmatch.models.Titulo;
+import br.com.chell.screenmatch.models.TituloOmdb;
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.net.URI;
@@ -29,11 +32,15 @@ public class OrganizadorHttp extends OrganizadorApi{
 
         String json = response.body();
 
-        Gson gson = new Gson();
-        Titulo meuTitulo = gson.fromJson(json, Titulo.class);
-        System.out.println(response.body());
-        System.out.println("Título: " + meuTitulo.getNome());
-        System.out.println("Ano de lançamento: " + meuTitulo.getAnoLancamento());
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy
+                        (FieldNamingPolicy.UPPER_CAMEL_CASE)
+                .create();
+        TituloOmdb meuTituloOmdb = gson.fromJson(json, TituloOmdb.class);
+        System.out.println(meuTituloOmdb);
+
+        Titulo meuTitulo = new Titulo(meuTituloOmdb);
+        System.out.println(meuTitulo);
     }
 }
 
