@@ -25,7 +25,7 @@ public class OrganizadorHttp extends OrganizadorApi{
 
     public void exibiFichaApi() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()                                 //ac4c9a6
+        HttpRequest request = HttpRequest.newBuilder()                                 
                 .uri(URI.create("https://www.omdbapi.com/?t=" + filmeLink + "&apikey=" + apiKey))
                 .build();
         HttpResponse<String> response = client
